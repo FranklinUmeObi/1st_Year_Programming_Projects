@@ -1,0 +1,77 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class HighLow {
+
+	public static void main(String[] args) {
+
+		Random generator = new Random();
+		boolean finished = false;
+		int count = 0;
+		for (count = 0; count < 4; count++) {
+			int randomCard = generator.nextInt(13) + 1;
+			do {
+				Scanner scan = new Scanner(System.in);
+				int newRandomCard = generator.nextInt(13) + 1;
+				System.out.println("You are " + count + " out of 4 ");
+				if (randomCard == 11) {
+					System.out.println("The card is a jack");
+				} else if (randomCard == 12) {
+					System.out.println("The card is a queen");
+				} else if (randomCard == 13) {
+					System.out.println("The card is a king");
+				} else if (randomCard == 1) {
+					System.out.println("The card is an ace");
+				} else {
+					System.out.println("The card is a " + randomCard);
+				}
+				
+				System.out.println("Do you think the next card will be higher, lower or equal? : ");
+
+				if (scan.hasNext("higher")) {
+					if (newRandomCard > randomCard) {
+						 count += 1 ;
+						System.out.println("Correct");
+						randomCard = newRandomCard;
+					} else {
+						System.out.println("Incorrect, the next card was " + newRandomCard + " Lets try again.");
+						count = 0;
+					}
+				}
+
+				else if (scan.hasNext("lower")) {
+					if (newRandomCard < randomCard) {
+						 count += 1 ;
+						System.out.println("Correct");
+						randomCard = newRandomCard;
+					} else {
+						System.out.println("Incorrect, the next card was " + newRandomCard + " Lets try again.");
+						count = 0;
+					}
+				}
+
+				else if (scan.hasNext("equal")) {
+					if (newRandomCard == randomCard) {
+						 count += 1 ;
+						System.out.println("Correct");
+						randomCard = newRandomCard;
+					} else {
+						System.out.println("Incorrect, the next card was " + newRandomCard + " Lets try again.");
+						count = 0;
+					}
+				}
+
+				else {
+					System.out.println("That was an invalid answer please restart");
+					count = 0;
+				}
+				if (count == 4) {
+					 System.out.print("Congratulations you got them all correct.");
+					finished = true;
+				}
+			} while (!finished);
+		}
+	//	System.out.print("Congratulations you got them all correct.");
+	}
+
+}
